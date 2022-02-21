@@ -8,6 +8,8 @@ public class GenerateParticles : MonoBehaviour
     public float destroyCooldown;    
     void Start()
     {
+        gameObject.transform.parent = GameObject.Find("ParticlesManager").transform;
+        
         ps = GetComponent<ParticleSystem>();
         
         ps.Play();

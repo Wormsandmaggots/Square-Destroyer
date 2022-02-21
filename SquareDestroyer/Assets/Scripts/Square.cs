@@ -14,10 +14,23 @@ public class Square : MonoBehaviour
     public float speed;
     public float destroyCooldown;
 
+    private BoxCollider2D collider;
+
     void Start()
     {
         spawner = GetComponentInParent<Spawner>();
+        collider = GetComponent<BoxCollider2D>();
+        
         GetComponent<SpriteRenderer>().color = new Color(Random.value, Random.value, Random.value);
+        
+        if (GameManager.instance.IsScreenActive())
+        {
+            collider.enabled = false;
+        }
+        else
+        {
+            collider.enabled = true;
+        }
     }
 
     // Update is called once per frame
@@ -45,8 +58,11 @@ public class Square : MonoBehaviour
 
     private void OnMouseDown()
     {
-        Instantiate(particlesPrefab, transform.position,quaternion.identity);
+        ParticleSystem ps = Instantiate(particlesPrefab, transform.position,new Quaternion(0,0,180,0));
+        ps.startColor = GetComponent<SpriteRenderer>().color;
+        
         GameManager.instance.UpdatePoints((int)speed);
+        
         Destroy(gameObject);
     }
 }
