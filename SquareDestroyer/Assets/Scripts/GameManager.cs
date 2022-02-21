@@ -76,13 +76,13 @@ public class GameManager : MonoBehaviour
     public void LoadScene(string sceneName)
     {
         pointsDisplay.SetActive(true);
-        LoadScene(sceneName);
+        SceneManager.LoadScene(sceneName);
     }
 
     public void LoadScene(int sceneId)
     {
         pointsDisplay.SetActive(true);
-        LoadScene(sceneId);
+        SceneManager.LoadScene(sceneId);
     }
 
 
