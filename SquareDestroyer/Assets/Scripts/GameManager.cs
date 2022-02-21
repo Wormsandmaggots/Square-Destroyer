@@ -55,7 +55,6 @@ public class GameManager : MonoBehaviour
         points += amount;
         pointsDisplay.GetComponent<Text>().text = points.ToString();
         pointsAnim.SetBool("GainPoint", true);
-        pointsAnim.SetBool("GainPoint", false);
     }
 
     public void SetTimeScale(float scale)

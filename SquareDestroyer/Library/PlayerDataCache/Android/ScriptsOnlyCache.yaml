@@ -1,6 +1,7 @@
 ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
+    - AudioManager
     - DestroyIfDuplicate
     - DontDestroyOnLoad
     - FitInScreen
@@ -35,8 +36,10 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
@@ -73,13 +76,13 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 3020}
+      Script: {instanceID: 3022}
     - Class: 114
-      Script: {instanceID: 3732}
+      Script: {instanceID: 3734}
     - Class: 114
-      Script: {instanceID: 3964}
+      Script: {instanceID: 3966}
     - Class: 114
-      Script: {instanceID: 4340}
+      Script: {instanceID: 4342}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 157
@@ -113,6 +116,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
+    - Class: 83
+      Script: {instanceID: 0}
     - Class: 91
       Script: {instanceID: 0}
     - Class: 95
@@ -122,35 +127,37 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 1550}
+      Script: {instanceID: 1552}
     - Class: 114
-      Script: {instanceID: 2322}
+      Script: {instanceID: 2324}
     - Class: 114
-      Script: {instanceID: 2634}
+      Script: {instanceID: 2636}
     - Class: 114
-      Script: {instanceID: 2762}
+      Script: {instanceID: 2764}
     - Class: 114
-      Script: {instanceID: 2940}
+      Script: {instanceID: 2942}
     - Class: 114
-      Script: {instanceID: 3020}
+      Script: {instanceID: 3022}
     - Class: 114
-      Script: {instanceID: 3200}
+      Script: {instanceID: 3202}
     - Class: 114
-      Script: {instanceID: 3460}
+      Script: {instanceID: 3462}
     - Class: 114
-      Script: {instanceID: 3584}
+      Script: {instanceID: 3586}
     - Class: 114
-      Script: {instanceID: 3732}
+      Script: {instanceID: 3734}
     - Class: 114
-      Script: {instanceID: 3742}
+      Script: {instanceID: 3744}
     - Class: 114
-      Script: {instanceID: 3964}
+      Script: {instanceID: 3966}
     - Class: 114
-      Script: {instanceID: 4340}
+      Script: {instanceID: 4342}
     - Class: 114
-      Script: {instanceID: 4976}
+      Script: {instanceID: 4978}
     - Class: 114
-      Script: {instanceID: 5578}
+      Script: {instanceID: 5580}
+    - Class: 114
+      Script: {instanceID: 5818}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128

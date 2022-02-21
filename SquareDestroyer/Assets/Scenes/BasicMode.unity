@@ -200,7 +200,7 @@ Transform:
   m_GameObject: {fileID: 68091289}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10, y: 12, z: 1}
+  m_LocalScale: {x: 11, y: 14, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -234,7 +234,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2705362295663925802, guid: f57862387e896014fbddc4a289429f6a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6.27
+      value: 6.5
       objectReference: {fileID: 0}
     - target: {fileID: 2705362295663925802, guid: f57862387e896014fbddc4a289429f6a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -312,7 +312,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2705362295663925802, guid: f57862387e896014fbddc4a289429f6a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.86
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2705362295663925802, guid: f57862387e896014fbddc4a289429f6a, type: 3}
       propertyPath: m_LocalPosition.y
@@ -364,7 +364,7 @@ PrefabInstance:
       objectReference: {fileID: 2053957331104355343, guid: 417dcdf767ea42c438b49cc9702028ec, type: 3}
     - target: {fileID: 5089219836139610579, guid: f57862387e896014fbddc4a289429f6a, type: 3}
       propertyPath: positionRange
-      value: 4.6
+      value: 4.55
       objectReference: {fileID: 0}
     - target: {fileID: 5089219836139610579, guid: f57862387e896014fbddc4a289429f6a, type: 3}
       propertyPath: xAxisMovement
@@ -432,7 +432,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2705362295663925802, guid: f57862387e896014fbddc4a289429f6a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.75
+      value: -6
       objectReference: {fileID: 0}
     - target: {fileID: 2705362295663925802, guid: f57862387e896014fbddc4a289429f6a, type: 3}
       propertyPath: m_LocalPosition.y
@@ -488,7 +488,7 @@ PrefabInstance:
       objectReference: {fileID: 2053957331104355343, guid: 417dcdf767ea42c438b49cc9702028ec, type: 3}
     - target: {fileID: 5089219836139610579, guid: f57862387e896014fbddc4a289429f6a, type: 3}
       propertyPath: positionRange
-      value: 4.6
+      value: 4.55
       objectReference: {fileID: 0}
     - target: {fileID: 5089219836139610579, guid: f57862387e896014fbddc4a289429f6a, type: 3}
       propertyPath: xAxisMovement
@@ -632,7 +632,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2705362295663925802, guid: f57862387e896014fbddc4a289429f6a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6.27
+      value: -6.5
       objectReference: {fileID: 0}
     - target: {fileID: 2705362295663925802, guid: f57862387e896014fbddc4a289429f6a, type: 3}
       propertyPath: m_LocalPosition.z
