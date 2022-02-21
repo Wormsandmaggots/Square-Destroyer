@@ -41,3 +41,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Spawners
+    uniqueID: 2237463435
+    locked: 0
+  - name: Square
+    uniqueID: 921801767
+    locked: 0

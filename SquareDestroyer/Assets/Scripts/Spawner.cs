@@ -13,15 +13,16 @@ public class Spawner : MonoBehaviour
     {
         Left = -1,
         Right = 1,
-        Up = 1,
-        Down = -1
+        Up = 2,
+        Down = -2
     }
 
     public float spawningCooldown;
     private float tempCooldown;
     public float positionRange;
 
-    public bool xAxisMovement;
+    // if spawned squares move over X Axis
+    public bool xAxisMovement = false;
     
     void Start()
     {
@@ -42,7 +43,19 @@ public class Spawner : MonoBehaviour
 
     private void CreateSquare()
     {
-        Instantiate(squarePrefab, xAxisMovement ? new Vector3(Random.Range(-positionRange, positionRange), 0) : new Vector3(0, Random.Range(-positionRange, positionRange)),new Quaternion());
+        GameObject square = Instantiate(squarePrefab);
+
+        square.transform.parent = gameObject.transform;
+
+        if (xAxisMovement)
+        {
+            square.transform.position = new Vector3(gameObject.transform.position.x, Random.Range(-positionRange, positionRange) + gameObject.transform.position.y);
+            
+        }
+        else
+        {
+            square.transform.position = new Vector3(Random.Range(-positionRange, positionRange) + gameObject.transform.position.x, gameObject.transform.position.y);
+        }
     }
     
 }
