@@ -31,8 +31,10 @@ public class GameManager : MonoBehaviour
     [Range(0,1)]
     public float timeScaleOnScreen;
 
-    [HideInInspector]
-    public GameMode gameMode;
+    public int hp;
+
+    //[HideInInspector]
+    public GameMode gameMode = 0;
     public enum GameMode
     {
         Relaxing,
@@ -80,6 +82,11 @@ public class GameManager : MonoBehaviour
         }
 
         return false;
+    }
+
+    public void UpdateHP(int subtractionAmount)
+    {
+        hp -= subtractionAmount;
     }
 
     public void LoadScene(string sceneName)

@@ -15,23 +15,14 @@ public class Square : MonoBehaviour
     public float destroyCooldown;
 
     private BoxCollider2D collider;
-    
-    public Difficulty difficulty;
-    public enum Difficulty
-    {
-        Relaxed = 2,
-        Normal = 3,
-        Challenge = 4,
-        Chaos = 5
-    }
 
     void Start()
     {
         spawner = GetComponentInParent<Spawner>();
         collider = GetComponent<BoxCollider2D>();
-        
+
         GetComponent<SpriteRenderer>().color = new Color(Random.value, Random.value, Random.value);
-        
+
         if (GameManager.instance.IsScreenActive())
         {
             collider.enabled = false;
@@ -41,31 +32,31 @@ public class Square : MonoBehaviour
             collider.enabled = true;
         }
 
-        if (GameManager.instance.gameMode == GameManager.GameMode.Progressive)
+        float maxSpeed = (float)GameManager.instance.points / 50;
+        if (maxSpeed < 1)
         {
-            difficulty = ChangeDifficultyProgressively();
+            maxSpeed = 1;
         }
-        else if (GameManager.instance.gameMode == GameManager.GameMode.Relaxing)
+        else if(maxSpeed > 5.5f)
         {
-            difficulty = Difficulty.Relaxed;
+            maxSpeed = 5.5f;
         }
-        else
+
+        if (spawner.xAxisMovement && maxSpeed > 4.5f)
         {
-            difficulty = Difficulty.Chaos;
+            maxSpeed = 4.5f;
         }
 
         if (spawner.randomSquareSpeed)
         {
-            speed = Random.Range(0.6f, (float)difficulty);
+            speed = Random.Range(0.6f,maxSpeed);
         }
-        
-        Debug.Log(speed);
     }
 
     // Update is called once per frame
     void Update()
     {
-        MoveSquare();
+        MoveInDirection();
 
         destroyCooldown -= Time.deltaTime;
 
@@ -75,7 +66,7 @@ public class Square : MonoBehaviour
         }
     }
 
-    private void MoveSquare()
+    private void MoveInDirection()
     {
         Vector3 move = spawner.xAxisMovement ? Vector3.right : Vector3.up;
 
@@ -94,24 +85,17 @@ public class Square : MonoBehaviour
         
         Destroy(gameObject);
     }
-    
-    private Difficulty ChangeDifficultyProgressively()
+
+    private void OnCollisionEnter2D(Collision2D col)
     {
-        int points = GameManager.instance.points;
-
-        if (points >= 200)
+        Debug.Log(col.gameObject.CompareTag("Collider"));
+        if (col.gameObject.CompareTag("Collider"))
         {
-            return Difficulty.Chaos;
+            if (spawner.direction == col.gameObject.GetComponent<BoxDestroyer>().directionDestroy)
+            {
+                GameManager.instance.UpdateHP(1);
+                Destroy(gameObject);
+            }
         }
-        else if (points >= 100)
-        {
-            return Difficulty.Challenge;
-        }
-        else if(points >= 50)
-        {
-            return Difficulty.Normal;
-        }
-
-        return Difficulty.Relaxed;
     }
 }
