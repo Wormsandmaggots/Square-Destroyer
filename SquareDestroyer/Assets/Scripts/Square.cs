@@ -15,6 +15,15 @@ public class Square : MonoBehaviour
     public float destroyCooldown;
 
     private BoxCollider2D collider;
+    
+    public Difficulty difficulty;
+    public enum Difficulty
+    {
+        Relaxed = 2,
+        Normal = 3,
+        Challenge = 4,
+        Chaos = 5
+    }
 
     void Start()
     {
@@ -31,6 +40,26 @@ public class Square : MonoBehaviour
         {
             collider.enabled = true;
         }
+
+        if (GameManager.instance.gameMode == GameManager.GameMode.Progressive)
+        {
+            difficulty = ChangeDifficultyProgressively();
+        }
+        else if (GameManager.instance.gameMode == GameManager.GameMode.Relaxing)
+        {
+            difficulty = Difficulty.Relaxed;
+        }
+        else
+        {
+            difficulty = Difficulty.Chaos;
+        }
+
+        if (spawner.randomSquareSpeed)
+        {
+            speed = Random.Range(0.6f, (float)difficulty);
+        }
+        
+        Debug.Log(speed);
     }
 
     // Update is called once per frame
@@ -61,8 +90,28 @@ public class Square : MonoBehaviour
         ParticleSystem ps = Instantiate(particlesPrefab, transform.position,new Quaternion(0,0,180,0));
         ps.startColor = GetComponent<SpriteRenderer>().color;
         
-        GameManager.instance.UpdatePoints((int)speed);
+        GameManager.instance.UpdatePoints(1);
         
         Destroy(gameObject);
+    }
+    
+    private Difficulty ChangeDifficultyProgressively()
+    {
+        int points = GameManager.instance.points;
+
+        if (points >= 200)
+        {
+            return Difficulty.Chaos;
+        }
+        else if (points >= 100)
+        {
+            return Difficulty.Challenge;
+        }
+        else if(points >= 50)
+        {
+            return Difficulty.Normal;
+        }
+
+        return Difficulty.Relaxed;
     }
 }

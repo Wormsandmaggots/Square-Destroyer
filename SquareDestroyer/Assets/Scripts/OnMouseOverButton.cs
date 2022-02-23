@@ -24,7 +24,7 @@ public class OnMouseOverButton : MonoBehaviour
 
     private void ChangeSprite()
     {
-        if (Vector3.Distance(gameObject.transform.position, Input.mousePosition) <= 55 || (Input.touchCount > 0 && (Input.GetTouch(0).phase == TouchPhase.Began && Vector3.Distance(gameObject.transform.position,Input.GetTouch(0).position) <= 55)))
+        if (Vector3.Distance(gameObject.transform.position, Input.mousePosition) <= 55 || (Input.touchCount > 0 && (Input.GetTouch(0).phase == TouchPhase.Began && Vector3.Distance(gameObject.transform.position,Input.GetTouch(0).position) <= 120)))
         {
             image.sprite = changeSprite;
         }

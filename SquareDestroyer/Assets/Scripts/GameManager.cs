@@ -18,17 +18,27 @@ public class GameManager : MonoBehaviour
 
         instance = this;
     }
-
-    private int points;
+    
+    [HideInInspector]
+    public int points;
     private GameObject pointsDisplay;
     private Animator pointsAnim;
 
     private GameObject startScreen;
     private GameObject gameOverScreen;
     private GameObject modeScreen;
-
+    
     [Range(0,1)]
     public float timeScaleOnScreen;
+
+    [HideInInspector]
+    public GameMode gameMode;
+    public enum GameMode
+    {
+        Relaxing,
+        Progressive,
+        Chaos
+    }
 
     private void Start()
     {
@@ -84,5 +94,24 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(sceneId);
     }
 
+    public void ChangeGameMode(int modeID)
+    {
+        if (modeID == (int)GameMode.Relaxing)
+        {
+            gameMode = GameMode.Relaxing;
+        }
+        else if (modeID == (int)GameMode.Progressive)
+        {
+            gameMode = GameMode.Progressive;
+        }
+        else
+        {
+            gameMode = GameMode.Chaos;
+        }
+    }
 
+    public void ChangeGameMode(GameMode mode)
+    {
+        gameMode = mode;
+    }
 }

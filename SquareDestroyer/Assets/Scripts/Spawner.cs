@@ -8,6 +8,7 @@ public class Spawner : MonoBehaviour
 {
     public GameObject squarePrefab;
     
+    // in which direction square should move
     public Direction direction;
     public enum Direction
     {
@@ -20,6 +21,8 @@ public class Spawner : MonoBehaviour
     public float spawningCooldown;
     private float tempCooldown;
     public float positionRange;
+
+    public bool randomSquareSpeed;
 
     // if spawned squares move over X Axis
     public bool xAxisMovement = false;
@@ -57,5 +60,4 @@ public class Spawner : MonoBehaviour
             square.transform.position = new Vector3(Random.Range(-positionRange, positionRange) + gameObject.transform.position.x, gameObject.transform.position.y);
         }
     }
-    
 }
