@@ -29,6 +29,8 @@ public class Spawner : MonoBehaviour
     
     void Start()
     {
+        if (GameManager.instance.gameMode == GameManager.GameMode.Chaos)
+            spawningCooldown = 3;
         tempCooldown = spawningCooldown;
     }
 
