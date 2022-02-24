@@ -14,12 +14,28 @@ public class Square : MonoBehaviour
     public float speed;
 
     private BoxCollider2D collider;
-
-    private int nextAngel = 0;
+    
     private float stopTime;
     private float tempStopTime;
+    
+    private float difference;
+    
+    public float sinusMovementSpeedRange;
+    private float randomMagnitude;
+    private float randomHeight;
 
-    public int randomMovement;
+    public Movement randomMovement;
+    public enum Movement
+    {
+        Straight,
+        ForwardAndBackward,
+        Sinus,
+        StopAndGo,
+        Obliquely,
+        Bow,
+        Fall,
+        Circle
+    }
 
     void Start()
     {
@@ -38,67 +54,121 @@ public class Square : MonoBehaviour
         }
         
         float maxSpeed = (float)GameManager.instance.points / 50;
+        float minSpeed = 0.6f;
         if (GameManager.instance.gameMode == GameManager.GameMode.Chaos)
         {
-            maxSpeed = 5.5f;
-            randomMovement = Random.Range(0, 4);
+            maxSpeed = 4.5f;
+            if (spawner.xAxisMovement)
+            {
+                maxSpeed = 4f;
+            }
+            
+            randomMovement = (Movement)Random.Range(0, 6);
+            if (randomMovement == Movement.StopAndGo)
+            {
+                minSpeed = (int)Movement.StopAndGo;
+            }
+
+            speed = Random.Range(minSpeed, maxSpeed);
         }
         else
         {
-            randomMovement = 0;
+            randomMovement = Movement.Straight;
             
             if (maxSpeed < 1)
             {
                 maxSpeed = 1;
             }
-            else if (maxSpeed > 5.5f)
-            {
-                maxSpeed = 5.5f;
-            }
-
-            if (spawner.xAxisMovement && maxSpeed > 4.5f)
+            else if (maxSpeed > 4.5f)
             {
                 maxSpeed = 4.5f;
             }
 
+            if (spawner.xAxisMovement && maxSpeed > 4f)
+            {
+                maxSpeed = 4f;
+            }
+
             if (spawner.randomSquareSpeed)
             {
-                speed = Random.Range(0.6f, maxSpeed);
+                speed = Random.Range(minSpeed, maxSpeed);
             }
         }
-        
-        stopTime = Random.Range(0.5f, 1f);
+
+        stopTime = Random.Range(0.5f, 1.5f);
         tempStopTime = stopTime;
+        
+        if (randomMovement == Movement.Obliquely)
+        {
+            if (spawner.xAxisMovement)
+            {
+                difference = spawner.transform.position.y - gameObject.transform.position.y;
+                difference /= 2.5f;
+            }
+            else
+            {
+                difference = spawner.transform.position.x - gameObject.transform.position.x;
+                difference /= 2;
+            }
+        }
+        else if (randomMovement == Movement.Sinus ||
+                 randomMovement == Movement.Bow || 
+                 randomMovement == Movement.ForwardAndBackward ||
+                 randomMovement == Movement.Circle)
+        {
+            randomMagnitude = Random.Range(sinusMovementSpeedRange / 2, sinusMovementSpeedRange);
+            randomHeight = Random.Range(sinusMovementSpeedRange / 2, sinusMovementSpeedRange);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
+        
         switch (randomMovement)
         {
-            case 0:
+            case Movement.Straight:
             {
                 MoveInDirection();
                 break;
             }
-            case 1:
+            case Movement.ForwardAndBackward:
             {
                 MoveInDirection();
-                MoveInCircle();
+                MoveForwardAndBackward();
                 break;
             }
-            case 2:
+            case Movement.Sinus:
             {
                 MoveInDirection();
                 MoveInSinus();
                 break;
             } 
-            case 3:
+            case Movement.StopAndGo:
             {
                 MoveAndStop();
                 break; 
             }
+            case Movement.Obliquely:
+            {
+                MoveObliquely();
+                MoveInDirection();
+                break;
+            }
+            case Movement.Bow:
+            {
+                MoveInBow();
+                MoveInDirection();
+                break;
+            }
+            case Movement.Fall:
+            {
+                MoveInFall();
+                MoveInDirection();
+                break;
+            }
         }
+        
     }
 
     private void OnMouseDown()
@@ -133,11 +203,18 @@ public class Square : MonoBehaviour
         transform.Translate(move);
     }
         
-    private void MoveInCircle()
+    private void MoveForwardAndBackward()
     {
-        Vector3 move = new Vector3(math.sin(nextAngel) * speed * Time.deltaTime, math.cos(nextAngel) * speed * Time.deltaTime);
-        nextAngel++;
-        
+        Vector3 move;
+        if (spawner.xAxisMovement)
+        {
+            move = new Vector3(math.sin(Time.time * randomMagnitude) * math.cos(Time.time * randomMagnitude) * Time.deltaTime * randomHeight,0);
+        }
+        else
+        {
+            move = new Vector3(0, math.sin(Time.time * randomMagnitude) * math.cos(Time.time * randomMagnitude) * Time.deltaTime * randomHeight);
+        }
+
         transform.Translate(move);
     }
         
@@ -146,22 +223,33 @@ public class Square : MonoBehaviour
         Vector3 move;
         if (spawner.xAxisMovement)
         {
-            move = new Vector3(0, math.sin(nextAngel));
+            move = new Vector3(0, math.sin(Time.time * sinusMovementSpeedRange) * sinusMovementSpeedRange);
             move.y *= Time.deltaTime;
         }
         else
         {
-            move = new Vector3(math.sin(nextAngel), 0);
+            move = new Vector3(math.sin(Time.time * randomMagnitude) * randomHeight, 0);
             move.x *= Time.deltaTime;
         }
-        nextAngel++;
-                
+
         transform.Translate(move);
     }
 
     private void MoveObliquely()
     {
-        Vector3 move = new Vector3();
+        Vector3 move;
+        if (spawner.xAxisMovement)
+        {
+            move = new Vector3(0, difference);
+            move.y *= Time.deltaTime;
+        }
+        else
+        {
+            move = new Vector3(difference, 0);
+            move.x *= Time.deltaTime;
+        }
+        
+        transform.Translate(move);
     }
         
     private void MoveAndStop()
@@ -170,16 +258,31 @@ public class Square : MonoBehaviour
         {
             tempStopTime += Time.deltaTime;
             MoveInDirection();
-            Debug.Log("Move");
             return;
         }
         else if(tempStopTime >= stopTime)
         {
-            Debug.Log("Stop");
             tempStopTime = -stopTime;
             return;
         }
 
         tempStopTime += Time.deltaTime;
+    }
+
+    private void MoveInBow()
+    {
+        Vector3 move;
+        move = new Vector3(math.sin(Time.time * randomMagnitude) * randomHeight * Time.deltaTime,
+            math.cos(Time.time * randomMagnitude) * randomHeight * Time.deltaTime);
+        
+        transform.Translate(move);
+    }
+
+    private void MoveInFall()
+    {
+        Vector3 move;
+        move = new Vector3(math.sin(Time.time * randomMagnitude) * Time.deltaTime * randomHeight, math.sin(Time.time * randomMagnitude) * Time.deltaTime * randomHeight);
+        
+        transform.Translate(move);
     }
 }
