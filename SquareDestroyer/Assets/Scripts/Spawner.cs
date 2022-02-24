@@ -53,7 +53,6 @@ public class Spawner : MonoBehaviour
         if (xAxisMovement)
         {
             square.transform.position = new Vector3(gameObject.transform.position.x, Random.Range(-positionRange, positionRange) + gameObject.transform.position.y);
-            
         }
         else
         {
