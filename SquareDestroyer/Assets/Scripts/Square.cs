@@ -83,7 +83,7 @@ public class Square : MonoBehaviour
         {
             if (col.collider.GetComponent<BoxDestroyer>().directionDestroy == spawner.direction)
             {
-                GameManager.instance.UpdateHP(1);
+                GameManager.instance.UpdateHp(-1);
                 DestroySquare();
             }
         }

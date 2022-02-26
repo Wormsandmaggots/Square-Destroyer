@@ -10,9 +10,15 @@ public class OnMouseOverButton : MonoBehaviour
     private Sprite baseSprite;
     private Image image;
 
+    private Text text;
+    public string gameMode;
+
     private void Start()
     {
         image = GetComponent<Image>();
+        text = GetComponentInChildren<Text>();
+
+        text.text = gameMode;
 
         baseSprite = image.sprite;
     }
