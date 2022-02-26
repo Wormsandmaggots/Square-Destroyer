@@ -117,8 +117,19 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void ChangeGameMode(GameMode mode)
+    public void ChangeGameMode(string name)
     {
-        gameMode = mode;
+        if (name == GameMode.Chaos.ToString())
+        {
+            gameMode = GameMode.Chaos;
+        }
+        else if(name == GameMode.Progressive.ToString())
+        {
+            gameMode = GameMode.Progressive;
+        }
+        else
+        {
+            gameMode = GameMode.Relaxing;
+        }
     }
 }

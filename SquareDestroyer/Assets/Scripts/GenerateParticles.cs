@@ -15,7 +15,4 @@ public class GenerateParticles : MonoBehaviour
         ps.Play();
         Destroy(gameObject,destroyCooldown);
     }
-    
-    
-
 }
