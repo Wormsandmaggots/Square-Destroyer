@@ -169,6 +169,7 @@ GameObject:
   - component: {fileID: 4715741573819547579}
   - component: {fileID: 4715741573819547577}
   - component: {fileID: 4715741573819547576}
+  - component: {fileID: 3260801970857468424}
   m_Layer: 5
   m_Name: Record
   m_TagString: Untagged
@@ -225,8 +226,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -234,4 +235,19 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 100
+--- !u!114 &3260801970857468424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4715741573819547578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2be540c6a9875d441948e4d70c1a466c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  record: {fileID: 4715741573215661700}
+  recordName: {fileID: 4715741572225716405}
+  name: 

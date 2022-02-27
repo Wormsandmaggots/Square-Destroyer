@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Mathematics;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -37,13 +36,16 @@ public class Spawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (tempCooldown <= 0)
+        if (GameManager.instance.start)
         {
-            CreateSquare();
-            tempCooldown = spawningCooldown;
+            if (tempCooldown <= 0)
+            {
+                CreateSquare(); 
+                tempCooldown = spawningCooldown;
+            }
+            
+            tempCooldown -= Time.deltaTime;
         }
-
-        tempCooldown -= Time.deltaTime;
     }
 
     private void CreateSquare()

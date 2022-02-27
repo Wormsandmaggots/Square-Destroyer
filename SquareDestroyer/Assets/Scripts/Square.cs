@@ -60,8 +60,16 @@ public class Square : MonoBehaviour
     
     void Update()
     {
-        Move();
-        OnRaycast();
+        if (GameManager.instance.start)
+        {
+            Move();
+            OnRaycast();
+            
+            if (GameManager.instance.IsScreenActive())
+            {
+                collider.enabled = false;
+            }
+        }
     }
 
     private void DestroySquare()
@@ -195,7 +203,7 @@ public class Square : MonoBehaviour
         {
             randomMovement = Movement.Straight;
 
-            if (GameManager.instance.gameMode == GameManager.GameMode.Relaxing)
+            if (GameManager.instance.gameMode == GameManager.GameMode.Relax)
             {
                 maxSpeed = 2;
                 speed = Random.Range(minSpeed,maxSpeed);
@@ -286,6 +294,7 @@ public class Square : MonoBehaviour
                 { 
                     if (hit.collider == collider) 
                     {
+                        AudioManager.instance.Play("Explosion");
                         GenerateParticles();
                         AddPoint();
                         DestroySquare(); 
@@ -305,6 +314,7 @@ public class Square : MonoBehaviour
             { 
                 if (hit.collider == collider) 
                 {
+                    AudioManager.instance.Play("Explosion");
                     GenerateParticles();
                     AddPoint();
                     DestroySquare(); 

@@ -34,12 +34,18 @@ public class GameManager : MonoBehaviour
     public Heart[] hearts;
     private GameObject hpDisplay;
 
+    public Record[] records;
+    public Text currentScoreDisplay;
+    public GameObject newRecord;
+
+    public bool start;
+
     //[HideInInspector]
     public GameMode gameMode = 0;
     public enum GameMode
     {
-        Relaxing,
-        Progressive,
+        Relax,
+        Progress,
         Chaos
     }
 
@@ -48,19 +54,30 @@ public class GameManager : MonoBehaviour
         pointsDisplay = GameObject.Find("Points");
         pointsAnim = GameObject.Find("Points").GetComponent<Animator>();
         pointsDisplay.SetActive(false);
-        
+
         startScreen = GameObject.Find("StartScreen");
         gameOverScreen = GameObject.Find("GameOverScreen");
         gameOverScreen.SetActive(false);
         startScreen.SetActive(true);
         
+        records = gameOverScreen.GetComponentsInChildren<Record>();
+        foreach (Record record in records) 
+        {
+            record.SetRecord(PlayerPrefs.GetInt(record.name,0));
+        }
+        newRecord.SetActive(false);
+        
         hpDisplay = GameObject.Find("HP");
         hearts = hpDisplay.GetComponentsInChildren<Heart>();
         hpDisplay.SetActive(false);
-        
+
         pointsAnim.SetBool("GainPoint", false);
 
         hp = hearts.Length * hearts[0].hpAmount;
+
+        start = true;
+        
+        AudioManager.instance.PlayDelayed("StartScreen", 1);
         
         SetTimeScale(timeScaleOnScreen);
     }
@@ -72,6 +89,8 @@ public class GameManager : MonoBehaviour
         if (points % 10 == 0 && hp < 6)
         {
             UpdateHp(1);
+            hpDisplay.GetComponent<Animator>().SetBool("Gain", true);
+            AudioManager.instance.Play("HPGain");
         }
 
         pointsDisplay.GetComponent<Text>().text = points.ToString();
@@ -98,7 +117,7 @@ public class GameManager : MonoBehaviour
     {
         hp += amount;
         
-        if (amount < 0)
+        if (amount == -1)
         {
             for (int i = hearts.Length - 1; i >= 0; i--)
             {
@@ -116,51 +135,104 @@ public class GameManager : MonoBehaviour
                 heart.tempHPLossCooldown = heart.hpLossCooldown;
             }
             
+            AudioManager.instance.Play("HPLost");
+            
             if (hp <= 0)
             {
                 GameOver();
             }
+            
+            hpDisplay.GetComponent<Animator>().SetBool("Lost", true);
         }
-        else
+        else if(amount == 1)
         {
             for (int i = 0; i < hearts.Length; i++)
             {
                 if (hearts[i].hpAmount < 2)
                 {
-                    hearts[i].hpAmount += amount;
+                    hearts[i].hpAmount++;
                     hearts[i].UpdateHeartsSprite();
                     break;
                 }
+            }
+        }
+        else
+        {
+            foreach (Heart heart in hearts)
+            {
+                heart.hpAmount = 2;
+                heart.UpdateHeartsSprite();
             }
         }
     }
 
     private void GameOver()
     {
-        Debug.Log("GAME OVER");
+        AudioManager.instance.Play("GameOver");
+        
+        Save();
+        
+        currentScoreDisplay.text = points.ToString();
+        points = 0;
+        pointsDisplay.GetComponent<Text>().text = points.ToString();
+
+        hpDisplay.SetActive(false);
+        pointsDisplay.SetActive(false);
+        gameOverScreen.SetActive(true);
+        
+        UpdateHp(6);
+
+        start = false;
+    }
+
+    private void Save()
+    {
+        for (int i = 0; i < records.Length; i++)
+        {
+            if (records[i].name == gameMode.ToString())
+            {
+                if (points > Convert.ToInt32(records[i].record.text))
+                {
+                    newRecord.SetActive(true);
+                    records[i].SetRecord(points);
+                    PlayerPrefs.SetInt(gameMode.ToString(),points);
+                }
+                else
+                {
+                    newRecord.SetActive(false);
+                }
+                break;
+            }
+        }
     }
 
     public void LoadScene(string sceneName)
     {
         pointsDisplay.SetActive(true);
+        start = true;
+        AudioManager.instance.Play("Click");
+        AudioManager.instance.Stop("StartScreen");
         SceneManager.LoadScene(sceneName);
     }
 
     public void LoadScene(int sceneId)
     {
         pointsDisplay.SetActive(true);
+        start = true;
+        AudioManager.instance.Play("Click");
+        AudioManager.instance.Stop("StartScreen");
         SceneManager.LoadScene(sceneId);
     }
 
     public void ChangeGameMode(int modeID)
     {
-        if (modeID == (int)GameMode.Relaxing)
+        if (modeID == (int)GameMode.Relax)
         {
-            gameMode = GameMode.Relaxing;
+            gameMode = GameMode.Relax;
         }
-        else if (modeID == (int)GameMode.Progressive)
+        else if (modeID == (int)GameMode.Progress)
         {
-            gameMode = GameMode.Progressive;
+            gameMode = GameMode.Progress;
         }
         else
         {
@@ -174,13 +246,13 @@ public class GameManager : MonoBehaviour
         {
             gameMode = GameMode.Chaos;
         }
-        else if(name == GameMode.Progressive.ToString())
+        else if(name == GameMode.Progress.ToString())
         {
-            gameMode = GameMode.Progressive;
+            gameMode = GameMode.Progress;
         }
         else
         {
-            gameMode = GameMode.Relaxing;
+            gameMode = GameMode.Relax;
         }
     }
 }

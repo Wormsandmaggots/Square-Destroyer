@@ -22,6 +22,8 @@ public class AudioManager : MonoBehaviour
         {
             sound.source = gameObject.AddComponent<AudioSource>();
             sound.source.clip = sound.clip;
+            sound.source.loop = sound.isLooping;
+            sound.source.volume = sound.volume;
         }
     }
     
@@ -33,5 +35,25 @@ public class AudioManager : MonoBehaviour
             return;
 
         s.source.Play();
+    }
+
+    public void PlayDelayed(string name, float delay)
+    {
+        Sound s = Array.Find(sounds, sound => sound.name == name);
+
+        if(s == null)
+            return;
+        
+        s.source.PlayDelayed(delay);
+    }
+
+    public void Stop(string name)
+    {
+        Sound s = Array.Find(sounds, sound => sound.name == name);
+
+        if (s == null)
+            return;
+        
+        s.source.Stop();
     }
 }
