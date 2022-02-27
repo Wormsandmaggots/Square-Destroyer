@@ -8,16 +8,18 @@ ScriptsOnlyBuild:
     - FitInScreen
     - GameManager
     - GenerateParticles
+    - Heart
     - OnMouseOverButton
+    - Record
     - Spawner
     - Square
     Unity.2D.Animation.Editor.dll:
     - UnityEditor.U2D.Animation.BoneGizmo
     Unity.2D.IK.Editor.dll:
     - UnityEditor.U2D.IK.IKEditorManager
+    - UnityEditor.U2D.IK.IKGizmos
     Unity.2D.Tilemap.Editor.dll:
     - UnityEditor.Tilemaps.GridBrush
-    - UnityEditor.Tilemaps.GridBrushEditor
     - UnityEditor.Tilemaps.GridPaintPaletteClipboard
     - UnityEditor.Tilemaps.GridPaintPaletteWindow
     - UnityEditor.Tilemaps.GridPaintingState
@@ -28,6 +30,8 @@ ScriptsOnlyBuild:
     - UnityEditor.Tilemaps.SceneViewOpenTilePaletteHelper
     - UnityEditor.Tilemaps.TileDragAndDropManager
     - UnityEditor.Tilemaps.TilemapPrefabStageHelper
+    Unity.Mobile.AndroidLogcat.Editor.dll:
+    - Unity.Android.Logcat.AndroidLogcatManager
     Unity.Rider.Editor.dll:
     - Packages.Rider.Editor.RiderScriptEditorData
     - Packages.Rider.Editor.UnitTesting.CallbackData
@@ -47,6 +51,7 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.Button
     - UnityEngine.UI.CanvasScaler
     - UnityEngine.UI.GraphicRaycaster
+    - UnityEngine.UI.GridLayoutGroup
     - UnityEngine.UI.Image
     - UnityEngine.UI.Text
   sceneClasses:
@@ -76,7 +81,11 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 1708}
     - Class: 114
+      Script: {instanceID: 2944}
+    - Class: 114
       Script: {instanceID: 3024}
+    - Class: 114
+      Script: {instanceID: 3464}
     - Class: 114
       Script: {instanceID: 3736}
     - Class: 114
@@ -157,9 +166,15 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 4980}
     - Class: 114
-      Script: {instanceID: 5582}
+      Script: {instanceID: 5450}
     - Class: 114
-      Script: {instanceID: 5820}
+      Script: {instanceID: 5534}
+    - Class: 114
+      Script: {instanceID: 5586}
+    - Class: 114
+      Script: {instanceID: 5824}
+    - Class: 114
+      Script: {instanceID: 5984}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -317,7 +332,7 @@ ScriptsOnlyBuild:
     className: IKManager2D
   - hash:
       serializedVersion: 2
-      Hash: 12c449e9c0c03295962f0f301ad18f78
+      Hash: e3f8a91f48b64c77fc908632cea27639
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameManager
@@ -653,7 +668,7 @@ ScriptsOnlyBuild:
     className: PhysicsRaycaster
   - hash:
       serializedVersion: 2
-      Hash: fd55b475833854c3dbabade1c0aeb408
+      Hash: c272e0d11d7dc3334cace72cf8b2697e
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: OnMouseOverButton
@@ -701,6 +716,12 @@ ScriptsOnlyBuild:
     className: TMP_SubMeshUI
   - hash:
       serializedVersion: 2
+      Hash: 6fb37f7a1cddcb024d16ad60b7fab4ac
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Heart
+  - hash:
+      serializedVersion: 2
       Hash: fd68d84f33fad85aac38f2739c0ee270
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
@@ -711,6 +732,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TMP_ScrollbarEventHandler
+  - hash:
+      serializedVersion: 2
+      Hash: 9efd769bfe0a74b91dbc006df556e86b
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Record
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
@@ -725,7 +752,7 @@ ScriptsOnlyBuild:
     className: BufferManager
   - hash:
       serializedVersion: 2
-      Hash: ed25d286c7281be1f9266e53a2ff33dc
+      Hash: cce10230c9eeace2f4cfa5222281dc8a
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: AudioManager
@@ -759,6 +786,48 @@ ScriptsOnlyBuild:
     assemblyName: Unity.2D.IK.Runtime.dll
     namespaceName: UnityEngine.U2D.IK
     className: FabrikSolver2D
+  - hash:
+      serializedVersion: 2
+      Hash: a325152ad9563ed900af221c132fea36
+    assemblyName: UnityEngine.Advertisements.dll
+    namespaceName: UnityEngine.Advertisements.Utilities
+    className: CoroutineExecutor
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: UnityEngine.Advertisements.dll
+    namespaceName: UnityEngine.Advertisements.Utilities
+    className: ApplicationQuit
+  - hash:
+      serializedVersion: 2
+      Hash: 88e2c6f501bf5dead831a3e44c30de40
+    assemblyName: UnityEngine.Advertisements.dll
+    namespaceName: UnityEngine.Advertisements.Platform.Editor
+    className: BannerPlaceholder
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: UnityEngine.Advertisements.dll
+    namespaceName: UnityEngine.Advertisements
+    className: Placeholder
+  - hash:
+      serializedVersion: 2
+      Hash: 075b868be727bd5f579fd72d2e2cc3b9
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: AdsInitializer
+  - hash:
+      serializedVersion: 2
+      Hash: b8a634e11dbf0915b3a945a5e12e9322
+    assemblyName: Unity.Mediation.dll
+    namespaceName: 
+    className: MockInterstitial
+  - hash:
+      serializedVersion: 2
+      Hash: b8a634e11dbf0915b3a945a5e12e9322
+    assemblyName: Unity.Mediation.dll
+    namespaceName: 
+    className: MockRewarded
   platform: 13
   scenePathNames:
   - Assets/Scenes/SampleScene.unity
