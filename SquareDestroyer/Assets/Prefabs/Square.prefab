@@ -150,6 +150,7 @@ MonoBehaviour:
   speed: 1
   destroyCooldown: 17
   sinusMovementSpeedRange: 5
+  rotationSpeed: 270
   randomMovement: 0
 --- !u!1 &9072966285206595608
 GameObject:

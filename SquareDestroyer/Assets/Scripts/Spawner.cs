@@ -26,10 +26,18 @@ public class Spawner : MonoBehaviour
     // if spawned squares move over X Axis
     public bool xAxisMovement = false;
     
+    [Range(0,1)]
+    public float heartSpawnProbability;
+    public GameObject heartPrefab;
+
+    [Range(0, 1)] 
+    public float friendSpawnProbability;
+    public GameObject friendPrefab;
+    
     void Start()
     {
         if (GameManager.instance.gameMode == GameManager.GameMode.Chaos)
-            spawningCooldown = 3;
+            spawningCooldown = 2.7f;
         tempCooldown = spawningCooldown;
     }
 
@@ -50,7 +58,7 @@ public class Spawner : MonoBehaviour
 
     private void CreateSquare()
     {
-        GameObject square = Instantiate(squarePrefab);
+        GameObject square = Instantiate(SpawnObject());
 
         square.transform.parent = gameObject.transform;
 
@@ -62,5 +70,22 @@ public class Spawner : MonoBehaviour
         {
             square.transform.position = new Vector3(Random.Range(-positionRange, positionRange) + gameObject.transform.position.x, gameObject.transform.position.y);
         }
+
+        square.GetComponent<Square>().spawner = this;
+    }
+
+    private GameObject SpawnObject()
+    {
+        if (Random.value <= friendSpawnProbability)
+        {
+                    return friendPrefab;
+        }
+        
+        if (Random.value <= heartSpawnProbability && !GameManager.instance.IsScreenActive())
+        {
+            return heartPrefab;
+        }
+
+        return squarePrefab;
     }
 }

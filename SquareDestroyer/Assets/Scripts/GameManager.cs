@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
 
     public int hp = 6;
     public Heart[] hearts;
-    private GameObject hpDisplay;
+    public GameObject hpDisplay;
 
     public Record[] records;
     public Text currentScoreDisplay;
@@ -86,13 +86,6 @@ public class GameManager : MonoBehaviour
     public void UpdatePoints(int amount)
     {
         points += amount;
-        
-        if (points % 10 == 0 && hp < 6)
-        {
-            UpdateHp(1);
-            hpDisplay.GetComponent<Animator>().SetBool("Gain", true);
-            AudioManager.instance.Play("HPGain");
-        }
 
         pointsDisplay.GetComponent<Text>().text = points.ToString();
         pointsAnim.SetBool("GainPoint", true);
@@ -142,7 +135,6 @@ public class GameManager : MonoBehaviour
             {
                 GameOver();
             }
-            
             hpDisplay.GetComponent<Animator>().SetBool("Lost", true);
         }
         else if(amount == 1)
@@ -153,6 +145,7 @@ public class GameManager : MonoBehaviour
                 {
                     hearts[i].hpAmount++;
                     hearts[i].UpdateHeartsSprite();
+                    hpDisplay.GetComponent<Animator>().SetBool("Gain", true);
                     break;
                 }
             }
@@ -171,6 +164,8 @@ public class GameManager : MonoBehaviour
     {
         AudioManager.instance.Play("GameOver");
         
+        InterstitialAd.ad.ShowAd();
+
         Save();
         
         currentScoreDisplay.text = points.ToString();

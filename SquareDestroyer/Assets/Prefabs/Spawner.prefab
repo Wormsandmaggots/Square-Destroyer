@@ -95,8 +95,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2425bc7f2e4179142a222f6980b8fa08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  squarePrefab: {fileID: 6236812324225408285, guid: 417dcdf767ea42c438b49cc9702028ec, type: 3}
+  squarePrefab: {fileID: 2053957331104355343, guid: 417dcdf767ea42c438b49cc9702028ec, type: 3}
   direction: 0
   spawningCooldown: 0
   positionRange: 0
+  randomSquareSpeed: 0
   xAxisMovement: 0
+  heartSpawnProbability: 0.03
+  heartPrefab: {fileID: 6034487022853519422, guid: e334929cb1077df4aba742ad559b0b2a, type: 3}
+  friendSpawnProbability: 0.027
+  friendPrefab: {fileID: 6971865443647043592, guid: c979f2dc4489b21488efaa17fa81cce7, type: 3}

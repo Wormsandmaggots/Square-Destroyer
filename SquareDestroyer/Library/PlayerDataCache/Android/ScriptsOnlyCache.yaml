@@ -1,18 +1,24 @@
 ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
+    - AdsInitializer
     - AudioManager
+    - BannerAd
     - BoxDestroyer
     - DestroyIfDuplicate
     - DontDestroyOnLoad
     - FitInScreen
+    - FlyingHeart
+    - Friend
     - GameManager
     - GenerateParticles
     - Heart
+    - InterstitialAd
     - OnMouseOverButton
     - Record
     - Spawner
     - Square
+    - StartScreenAdBanner
     Unity.2D.Animation.Editor.dll:
     - UnityEditor.U2D.Animation.BoneGizmo
     Unity.2D.IK.Editor.dll:
@@ -31,9 +37,13 @@ ScriptsOnlyBuild:
     - UnityEditor.Tilemaps.SceneViewOpenTilePaletteHelper
     - UnityEditor.Tilemaps.TileDragAndDropManager
     - UnityEditor.Tilemaps.TilemapPrefabStageHelper
+    Unity.Mobile.AndroidLogcat.Editor.dll:
+    - Unity.Android.Logcat.AndroidLogcatManager
     Unity.Rider.Editor.dll:
     - Packages.Rider.Editor.RiderScriptEditorData
     - Packages.Rider.Editor.UnitTesting.CallbackData
+    Unity.Timeline.Editor.dll:
+    - TimelineProjectSettings
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
@@ -44,6 +54,9 @@ ScriptsOnlyBuild:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
     - UnityEditor.TestTools.TestRunner.TestListCacheData
     - UnityEditor.TestTools.TestRunner.TestRun.TestJobDataHolder
+    UnityEngine.Advertisements.dll:
+    - UnityEngine.Advertisements.Placeholder
+    - UnityEngine.Advertisements.Platform.Editor.BannerPlaceholder
     UnityEngine.UI.dll:
     - UnityEngine.EventSystems.EventSystem
     - UnityEngine.EventSystems.StandaloneInputModule
@@ -78,19 +91,23 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 1790}
+      Script: {instanceID: 1744}
     - Class: 114
-      Script: {instanceID: 3190}
+      Script: {instanceID: 3042}
     - Class: 114
-      Script: {instanceID: 3282}
+      Script: {instanceID: 3128}
     - Class: 114
-      Script: {instanceID: 3788}
+      Script: {instanceID: 3582}
     - Class: 114
-      Script: {instanceID: 4110}
+      Script: {instanceID: 3874}
     - Class: 114
-      Script: {instanceID: 4374}
+      Script: {instanceID: 4114}
     - Class: 114
-      Script: {instanceID: 4816}
+      Script: {instanceID: 4514}
+    - Class: 114
+      Script: {instanceID: 45918}
+    - Class: 114
+      Script: {instanceID: 105830}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 157
@@ -137,43 +154,55 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 1552}
+      Script: {instanceID: 1516}
     - Class: 114
-      Script: {instanceID: 1554}
+      Script: {instanceID: 2398}
     - Class: 114
-      Script: {instanceID: 2498}
+      Script: {instanceID: 2724}
     - Class: 114
-      Script: {instanceID: 2850}
+      Script: {instanceID: 2856}
     - Class: 114
-      Script: {instanceID: 2994}
+      Script: {instanceID: 3042}
     - Class: 114
-      Script: {instanceID: 3190}
+      Script: {instanceID: 3128}
     - Class: 114
-      Script: {instanceID: 3282}
+      Script: {instanceID: 3318}
     - Class: 114
-      Script: {instanceID: 3788}
+      Script: {instanceID: 3582}
     - Class: 114
-      Script: {instanceID: 3942}
+      Script: {instanceID: 3718}
     - Class: 114
-      Script: {instanceID: 4110}
+      Script: {instanceID: 3874}
     - Class: 114
-      Script: {instanceID: 4124}
+      Script: {instanceID: 3884}
     - Class: 114
-      Script: {instanceID: 4374}
+      Script: {instanceID: 4114}
     - Class: 114
-      Script: {instanceID: 4816}
+      Script: {instanceID: 4514}
     - Class: 114
-      Script: {instanceID: 5538}
+      Script: {instanceID: 5178}
     - Class: 114
-      Script: {instanceID: 6054}
+      Script: {instanceID: 5668}
     - Class: 114
-      Script: {instanceID: 6152}
+      Script: {instanceID: 5756}
     - Class: 114
-      Script: {instanceID: 6208}
+      Script: {instanceID: 5808}
     - Class: 114
-      Script: {instanceID: 6482}
+      Script: {instanceID: 6050}
     - Class: 114
-      Script: {instanceID: 6670}
+      Script: {instanceID: 6216}
+    - Class: 114
+      Script: {instanceID: 6332}
+    - Class: 114
+      Script: {instanceID: 25214}
+    - Class: 114
+      Script: {instanceID: 27808}
+    - Class: 114
+      Script: {instanceID: 38920}
+    - Class: 114
+      Script: {instanceID: 45918}
+    - Class: 114
+      Script: {instanceID: 105830}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -197,12 +226,6 @@ ScriptsOnlyBuild:
     - Class: 224
       Script: {instanceID: 0}
   scriptHashData:
-  - hash:
-      serializedVersion: 2
-      Hash: ae83e830e7a90c0aff918c4c2e520825
-    assemblyName: UnityEngine.UI.dll
-    namespaceName: UnityEngine.UI
-    className: GraphicRaycaster
   - hash:
       serializedVersion: 2
       Hash: a6e561615949734e9f12f9b61661f43e
@@ -337,7 +360,7 @@ ScriptsOnlyBuild:
     className: IKManager2D
   - hash:
       serializedVersion: 2
-      Hash: e3f8a91f48b64c77fc908632cea27639
+      Hash: be38c5f5f3fe03669e185a267c4c811e
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameManager
@@ -409,6 +432,12 @@ ScriptsOnlyBuild:
     className: TestRunCallbackListener
   - hash:
       serializedVersion: 2
+      Hash: ae83e830e7a90c0aff918c4c2e520825
+    assemblyName: UnityEngine.UI.dll
+    namespaceName: UnityEngine.UI
+    className: GraphicRaycaster
+  - hash:
+      serializedVersion: 2
       Hash: f40fedccd4adbc76605bea6d67537e4b
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
@@ -469,16 +498,16 @@ ScriptsOnlyBuild:
     className: BeforeAfterTestCommandState
   - hash:
       serializedVersion: 2
-      Hash: 69415240821be7986b27e72bf9609a30
-    assemblyName: UnityEngine.UI.dll
-    namespaceName: UnityEngine.UI
-    className: Button
-  - hash:
-      serializedVersion: 2
       Hash: 0fd6822f6177297bd0eb4d83cc7a9030
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: ToggleGroup
+  - hash:
+      serializedVersion: 2
+      Hash: 69415240821be7986b27e72bf9609a30
+    assemblyName: UnityEngine.UI.dll
+    namespaceName: UnityEngine.UI
+    className: Button
   - hash:
       serializedVersion: 2
       Hash: 349d08daa6108b9a28f8c38fd40ce96f
@@ -493,7 +522,7 @@ ScriptsOnlyBuild:
     className: TextContainer
   - hash:
       serializedVersion: 2
-      Hash: 365350c837e7253173c8f5cb44452409
+      Hash: 073f3ea1a5e8260dec9ce33bc72648eb
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Spawner
@@ -517,7 +546,7 @@ ScriptsOnlyBuild:
     className: Outline
   - hash:
       serializedVersion: 2
-      Hash: 68206c040a7a9bb6994e07e4ff58e60e
+      Hash: 8e4b41416270acd37e6e48d2a2757814
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Square
@@ -815,6 +844,36 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: AdsInitializer
+  - hash:
+      serializedVersion: 2
+      Hash: 8de50e178a561143a35cce86d0b0ef8c
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: InterstitialAd
+  - hash:
+      serializedVersion: 2
+      Hash: 4863533db71664bb80e9f3614822ffda
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: BannerAd
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: StartScreenAdBanner
+  - hash:
+      serializedVersion: 2
+      Hash: 8e4b41416270acd37e6e48d2a2757814
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: FlyingHeart
+  - hash:
+      serializedVersion: 2
+      Hash: 8e4b41416270acd37e6e48d2a2757814
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Friend
   platform: 13
   scenePathNames:
   - Assets/Scenes/SampleScene.unity
