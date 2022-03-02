@@ -31,6 +31,9 @@ public class Square : MonoBehaviour
     
     public float rotationSpeed;
 
+    private bool isFriend;
+    private bool isHeart;
+
     public Movement randomMovement;
     public enum Movement
     {
@@ -50,10 +53,14 @@ public class Square : MonoBehaviour
         //spawner = GetComponentInParent<Spawner>();
         collider = GetComponent<BoxCollider2D>();
 
-        if (!GetComponent<Friend>())
+        isFriend = CompareTag("Friend");
+        isHeart = CompareTag("Heart");
+
+        if (!isFriend)
         {
             GetComponent<SpriteRenderer>().color = new Color(Random.value, Random.value, Random.value);
         }
+        
         maxSpeed = (float)GameManager.instance.points / 50;
         
         TurnOffCollider();
@@ -61,20 +68,7 @@ public class Square : MonoBehaviour
         MakeChangesOnMovement();
         MakeChangesOnCollider();
 
-        if (spawner.xAxisMovement)
-        {
-            if (randomMovement == Movement.RotationYAxis)
-            {
-                randomMovement = Movement.RotationXAxis;
-            }
-        }
-        else
-        {
-            if (randomMovement == Movement.RotationXAxis)
-            {
-                randomMovement = Movement.RotationYAxis;
-            }
-        }
+        MakeChangesOnAxis();
     }
     
     void Update()
@@ -84,10 +78,7 @@ public class Square : MonoBehaviour
             Move();
             OnRaycast();
             
-            if (GameManager.instance.IsScreenActive())
-            {
-                collider.enabled = false;
-            }
+            TurnOffCollider();
 
             if (destroyCooldown <= 0)
             {
@@ -113,13 +104,14 @@ public class Square : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D col)
     {
-        if (!GetComponent<Friend>())
+        if (!isFriend)
         {
             if (col.collider.CompareTag("Collider"))
             { 
                 if (col.collider.GetComponent<BoxDestroyer>().directionDestroy == spawner.direction) 
                 {
-                            GameManager.instance.UpdateHp(-1); DestroySquare(); 
+                            GameManager.instance.UpdateHp(-1);
+                            DestroySquare(); 
                 }
             }
         }
@@ -209,33 +201,51 @@ public class Square : MonoBehaviour
     }
 
     #region MakeChanges
+    private void MakeChangesOnAxis()
+    {
+        if (spawner.xAxisMovement)
+        {
+            if (randomMovement == Movement.RotationYAxis)
+            {
+                randomMovement = Movement.RotationXAxis;
+            }
+        }
+        else
+        {
+            if (randomMovement == Movement.RotationXAxis)
+            {
+                randomMovement = Movement.RotationYAxis;
+            }
+        }
+    }
+    
     private void MakeChangesOnGameMode()
     {
         if (GameManager.instance.gameMode == GameManager.GameMode.Chaos)
         {
-            maxSpeed = 4.5f;
-            minSpeed = 1.5f;
+            maxSpeed = 5f;
+            minSpeed = 2f;
             
             if (spawner.xAxisMovement)
             {
-                maxSpeed = 4f;
+                maxSpeed = 4.5f;
             }
             
             randomMovement = (Movement)Random.Range(0, 9);
             if (randomMovement == Movement.StopAndGo)
             {
-                minSpeed = 2f;
+                minSpeed = 2.5f;
             }
             else if(randomMovement == Movement.Bow ||
                     randomMovement == Movement.Fall)
             {
                 if (spawner.xAxisMovement)
                 {
-                    maxSpeed = 3;
+                    maxSpeed = 3.5f;
                 }
                 else
                 {
-                    maxSpeed = 3.5f;
+                    maxSpeed = 4f;
                 }
             }
         }
@@ -265,7 +275,7 @@ public class Square : MonoBehaviour
             }
         }
         
-        if (GetComponent<FlyingHeart>())
+        if (isHeart)
         {
             randomMovement = Movement.RotationYAxis;
             
@@ -315,10 +325,9 @@ public class Square : MonoBehaviour
 
     private void MakeChangesOnCollider()
     {
-        
         if (speed > 1)
         {
-            if (GetComponent<FlyingHeart>() || GetComponent<Friend>())
+            if (isFriend || isHeart)
             {
                 collider.size = new Vector2(collider.size.x + 0.02f, collider.size.y + 0.02f);
                 return;
@@ -331,9 +340,11 @@ public class Square : MonoBehaviour
         if (randomMovement == Movement.Bow ||
             randomMovement == Movement.Fall ||
             randomMovement == Movement.Sinus ||
-            randomMovement == Movement.ForwardAndBackward) 
+            randomMovement == Movement.ForwardAndBackward ||
+            randomMovement == Movement.RotationXAxis ||
+            randomMovement == Movement.RotationYAxis) 
         {
-            if (GetComponent<FlyingHeart>())
+            if (CompareTag("Heart"))
             {
                 return;
             }
@@ -360,17 +371,18 @@ public class Square : MonoBehaviour
                     {
                         AudioManager.instance.Play("Explosion");
                         GenerateParticles();
-                        AddPoint();
-                        
-                        if (GetComponent<FlyingHeart>())
+
+                        if (isHeart)
                         {
                             GameManager.instance.UpdateHp(1);
-                            GameManager.instance.hpDisplay.GetComponent<Animator>().SetBool("Gain", true);
-                            AudioManager.instance.Play("HPGain");
                         }
-                        else if (GetComponent<Friend>())
+                        else if (isFriend)
                         {
                             GameManager.instance.UpdateHp(-1);
+                        }
+                        else
+                        {
+                            AddPoint();
                         }
                         
                         DestroySquare(); 
@@ -392,17 +404,19 @@ public class Square : MonoBehaviour
                 {
                     AudioManager.instance.Play("Explosion");
                     GenerateParticles();
-                    AddPoint();
-                    
-                    if (GetComponent<FlyingHeart>())
+
+                    if (isHeart)
                     {
                         GameManager.instance.UpdateHp(1);
-                        GameManager.instance.hpDisplay.GetComponent<Animator>().SetBool("Gain", true);
-                        AudioManager.instance.Play("HPGain");
+                        AddPoint();
                     }
-                    else if (GetComponent<Friend>())
+                    else if (isFriend)
                     {
                         GameManager.instance.UpdateHp(-1);
+                    }
+                    else
+                    {
+                        AddPoint();
                     }
                     
                     DestroySquare(); 

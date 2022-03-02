@@ -148,7 +148,7 @@ MonoBehaviour:
   spawner: {fileID: 0}
   particlesPrefab: {fileID: 4321603110538976288, guid: 144cf7e69ba49bc41bf5f34fa370ea21, type: 3}
   speed: 1
-  destroyCooldown: 17
+  destroyCooldown: 20
   sinusMovementSpeedRange: 5
   rotationSpeed: 270
   randomMovement: 0

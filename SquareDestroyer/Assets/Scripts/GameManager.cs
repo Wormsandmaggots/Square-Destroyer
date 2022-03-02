@@ -135,6 +135,7 @@ public class GameManager : MonoBehaviour
             {
                 GameOver();
             }
+            
             hpDisplay.GetComponent<Animator>().SetBool("Lost", true);
         }
         else if(amount == 1)
@@ -146,6 +147,7 @@ public class GameManager : MonoBehaviour
                     hearts[i].hpAmount++;
                     hearts[i].UpdateHeartsSprite();
                     hpDisplay.GetComponent<Animator>().SetBool("Gain", true);
+                    AudioManager.instance.Play("HPGain");
                     break;
                 }
             }
@@ -158,14 +160,17 @@ public class GameManager : MonoBehaviour
                 heart.UpdateHeartsSprite();
             }
         }
+
+        if (hp > 6)
+        {
+            hp = 6;
+        }
     }
 
     private void GameOver()
     {
         AudioManager.instance.Play("GameOver");
         
-        InterstitialAd.ad.ShowAd();
-
         Save();
         
         currentScoreDisplay.text = points.ToString();
@@ -179,6 +184,8 @@ public class GameManager : MonoBehaviour
         UpdateHp(6);
 
         start = false;
+        
+        InterstitialAd.ad.ShowAd();
     }
 
     private void Save()

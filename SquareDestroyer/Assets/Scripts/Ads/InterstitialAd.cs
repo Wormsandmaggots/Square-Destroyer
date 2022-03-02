@@ -10,7 +10,7 @@ public class InterstitialAd : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsSho
 
     public static InterstitialAd ad;
 
-    public int cooldown = 1;
+    public int cooldown = 2;
     private int tempCooldown;
 
     void Awake()
@@ -53,8 +53,12 @@ public class InterstitialAd : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsSho
             LoadAd();
             tempCooldown = 0;
         }
+        else
+        {
+            tempCooldown++;
+        }
         // Note that if the ad content wasn't previously loaded, this method will fail
-        tempCooldown++;
+        
     }
  
     // Implement Load Listener and Show Listener interface methods: 

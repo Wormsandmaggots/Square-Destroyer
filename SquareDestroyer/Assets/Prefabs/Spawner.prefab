@@ -103,5 +103,5 @@ MonoBehaviour:
   xAxisMovement: 0
   heartSpawnProbability: 0.03
   heartPrefab: {fileID: 6034487022853519422, guid: e334929cb1077df4aba742ad559b0b2a, type: 3}
-  friendSpawnProbability: 0.027
+  friendSpawnProbability: 0.04
   friendPrefab: {fileID: 6971865443647043592, guid: c979f2dc4489b21488efaa17fa81cce7, type: 3}
