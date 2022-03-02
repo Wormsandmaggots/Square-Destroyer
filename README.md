@@ -11,4 +11,4 @@ Game is fully working and has ads.
 * Record board which shows record of every game mode.
 
 # Gameplay screens
-![Alt text](I:\projects\gihubScreens\SquareDestroyer\1.jpg?raw=true)
+![1](https://user-images.githubusercontent.com/72765186/156421601-0d650fd7-7045-4ced-92e1-05e55e206e68.jpg)
